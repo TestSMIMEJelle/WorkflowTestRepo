@@ -57,3 +57,4 @@ jobs:
           TAG: ${{ inputs.TAG }}
           ARTIFACT_DURATION: ${{ env.ARTIFACT_DURATION }}
           CHANGELOG: ${{ inputs.CHANGELOG }}
+          REPOSITORY: ${{ github.repository }}
