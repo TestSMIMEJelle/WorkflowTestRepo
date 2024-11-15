@@ -22,6 +22,8 @@ env:
 jobs:
   build:
     runs-on: "ubuntu-latest"
+    permissions: 
+      contents: write
     steps:
       - name: Determine input
         run: |
@@ -36,6 +38,7 @@ jobs:
           ref: ${{ env.CHECKOUT_REF }}
           path: ${{ env.ASSETS_PATH }}
       - name: Create tag
+
         run: |
           cd ${{ env.ASSETS_PATH }}
           git config user.name "github-actions[bot]"
