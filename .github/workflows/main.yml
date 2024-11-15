@@ -1,14 +1,14 @@
 on:
   workflow_dispatch:
     inputs:
-      tag:
+      TAG:
         required: true
         type: string
         description: Tag to be applied, for example 1.0.0
-      changelog:
+      CHANGELOG:
         required: true
         type: string
-      commit:
+      COMMIT:
         type: string
         description: full commit hash, if none supplied, latest main is taken
 
@@ -25,10 +25,10 @@ jobs:
     steps:
       - name: Determine input
         run: |
-          if [[ -z "${{ github.event.inputs.user_input }}" ]]; then
+          if [[ -z "${{ inputs.COMMIT }}" ]]; then
             echo "checkout_ref=main" >> $GITHUB_ENV
           else
-            echo "checkout_ref=${{ github.event.inputs.user_input }}" >> $GITHUB_ENV
+            echo "CHECKOUT_REF=${{ inputs.COMMIT }}" >> $GITHUB_ENV
           fi
       - name: Checkout code repository
         uses: actions/checkout@v3
@@ -40,8 +40,8 @@ jobs:
           cd ${{ env.ASSETS_PATH }}
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "${{ inputs.tag }}" "${{ env.checkout_ref }}"
-          git push origin "${{ inputs.tag }}"
+          git tag -a "${{ inputs.TAG }}" "${{ env.CHECKOUT_REF }}"
+          git push origin "${{ inputs.TAG }}"
           cd -
       - name: Checkout action repository
         uses: actions/checkout@v3
@@ -52,12 +52,9 @@ jobs:
         uses: ./Actions/VRC-Asset-Release-And-Upload.yml
         working-directory: ${{ env.ASSETS_PATH }}
         with:
-          ASSETS_PATH: ${{ . }}
+          ASSETS_PATH: .
           RELEASE_PATH: ${{ env.RELEASE_PATH }}
           UPLOAD_ENDPOINT: ${{ env.UPLOAD_ENDPOINT }}
-          TAG:
-            required: true
-            type: string
-          ARTIFACT_DURATION:
-            required: true
-            type: int
+          TAG: ${{ inputs.TAG }}
+          ARTIFACT_DURATION: ${{ env.ARTIFACT_DURATION }}
+          CHANGELOG: ${{ inputs.CHANGELOG }}
