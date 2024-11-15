@@ -48,13 +48,8 @@ jobs:
           cd -
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Checkout action repository
-        uses: actions/checkout@v3
-        with:
-          repository: TestSMIMEJelle/Repositories
-          path: ./Actions
       - name: Run action
-        uses: ./Actions
+        uses: TestSMIMEJelle/Repositories/action.yml@main
         with:
           ASSETS_PATH: ${{ env.ASSETS_PATH }}
           RELEASE_PATH: ${{ env.RELEASE_PATH }}
