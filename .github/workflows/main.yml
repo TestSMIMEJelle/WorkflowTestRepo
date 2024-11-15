@@ -50,9 +50,8 @@ jobs:
           path: ./Actions
       - name: Run action
         uses: ./Actions/VRC-Asset-Release-And-Upload.yml
-        working-directory: ${{ env.ASSETS_PATH }}
         with:
-          ASSETS_PATH: .
+          ASSETS_PATH: ${{ env.ASSETS_PATH }}
           RELEASE_PATH: ${{ env.RELEASE_PATH }}
           UPLOAD_ENDPOINT: ${{ env.UPLOAD_ENDPOINT }}
           TAG: ${{ inputs.TAG }}
