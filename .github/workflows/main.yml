@@ -33,7 +33,7 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ env.checkout_ref }}
+          ref: ${{ env.CHECKOUT_REF }}
           path: ${{ env.ASSETS_PATH }}
       - name: Create tag
         run: |
