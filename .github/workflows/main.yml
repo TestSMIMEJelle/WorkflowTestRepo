@@ -55,7 +55,7 @@ jobs:
       RELEASE_PATH: ${{ github.event.env.RELEASE_PATH }}
       UPLOAD_ENDPOINT: ${{ github.event.env.UPLOAD_ENDPOINT }}
       TAG: ${{ inputs.TAG }}
-      ARTIFACT_DURATION: ${{ github.event.env.ARTIFACT_DURATION }}
+      ARTIFACT_DURATION: ${{ fromJSON(github.event.env.ARTIFACT_DURATION) }}
       CHANGELOG: ${{ inputs.CHANGELOG }}
       REPOSITORY: ${{ github.repository }}
     secrets: inherit
