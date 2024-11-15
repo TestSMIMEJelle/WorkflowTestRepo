@@ -24,7 +24,7 @@ jobs:
     runs-on: "ubuntu-latest"
     permissions: 
       contents: write
-      workflow: write
+      workflows: write
     steps:
       - name: Determine input
         run: |
