@@ -51,11 +51,7 @@ jobs:
   deploy:
     uses: TestSMIMEJelle/Repositories/.github/workflows/action.yml@main
     with:
-      ASSETS_PATH: ${{ github.event.env.ASSETS_PATH }}
-      RELEASE_PATH: ${{ github.event.env.RELEASE_PATH }}
-      UPLOAD_ENDPOINT: ${{ github.event.env.UPLOAD_ENDPOINT }}
       TAG: ${{ inputs.TAG }}
-      ARTIFACT_DURATION: ${{ fromJSON(github.event.env.ARTIFACT_DURATION) }}
       CHANGELOG: ${{ inputs.CHANGELOG }}
       REPOSITORY: ${{ github.repository }}
     secrets: inherit
