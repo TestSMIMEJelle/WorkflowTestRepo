@@ -33,7 +33,7 @@ jobs:
             echo "CHECKOUT_REF=${{ inputs.COMMIT }}" >> $GITHUB_ENV
           fi
       - name: Checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ env.CHECKOUT_REF }}
           path: ${{ env.ASSETS_PATH }}
@@ -51,11 +51,11 @@ jobs:
   deploy:
     uses: TestSMIMEJelle/Repositories/.github/workflows/action.yml@main
     with:
-      ASSETS_PATH: ${{ env.ASSETS_PATH }}
-      RELEASE_PATH: ${{ env.RELEASE_PATH }}
-      UPLOAD_ENDPOINT: ${{ env.UPLOAD_ENDPOINT }}
+      ASSETS_PATH: ${{ github.event.env.ASSETS_PATH }}
+      RELEASE_PATH: ${{ github.event.env.RELEASE_PATH }}
+      UPLOAD_ENDPOINT: ${{ github.event.env.UPLOAD_ENDPOINT }}
       TAG: ${{ inputs.TAG }}
-      ARTIFACT_DURATION: ${{ env.ARTIFACT_DURATION }}
+      ARTIFACT_DURATION: ${{ github.event.env.ARTIFACT_DURATION }}
       CHANGELOG: ${{ inputs.CHANGELOG }}
       REPOSITORY: ${{ github.repository }}
     secrets: inherit
