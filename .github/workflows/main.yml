@@ -54,7 +54,7 @@ jobs:
           repository: TestSMIMEJelle/Repositories
           path: ./Actions
       - name: Run action
-        uses: ./Actions/VRC-Asset-Release-And-Upload.yml
+        uses: ./Actions
         with:
           ASSETS_PATH: ${{ env.ASSETS_PATH }}
           RELEASE_PATH: ${{ env.RELEASE_PATH }}
