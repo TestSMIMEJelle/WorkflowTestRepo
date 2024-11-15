@@ -20,7 +20,7 @@ env:
   WORKFLOW_VERSION: 1.0.1
 
 jobs:
-  build:
+  create-tag:
     runs-on: "ubuntu-latest"
     permissions: 
       contents: write
@@ -48,13 +48,14 @@ jobs:
           cd -
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run action
-        uses: TestSMIMEJelle/Repositories@main
-        with:
-          ASSETS_PATH: ${{ env.ASSETS_PATH }}
-          RELEASE_PATH: ${{ env.RELEASE_PATH }}
-          UPLOAD_ENDPOINT: ${{ env.UPLOAD_ENDPOINT }}
-          TAG: ${{ inputs.TAG }}
-          ARTIFACT_DURATION: ${{ env.ARTIFACT_DURATION }}
-          CHANGELOG: ${{ inputs.CHANGELOG }}
-          REPOSITORY: ${{ github.repository }}
+  deploy:
+    uses: TestSMIMEJelle/Repositories/.github/workflows/action.yml@main
+    with:
+      ASSETS_PATH: ${{ env.ASSETS_PATH }}
+      RELEASE_PATH: ${{ env.RELEASE_PATH }}
+      UPLOAD_ENDPOINT: ${{ env.UPLOAD_ENDPOINT }}
+      TAG: ${{ inputs.TAG }}
+      ARTIFACT_DURATION: ${{ env.ARTIFACT_DURATION }}
+      CHANGELOG: ${{ inputs.CHANGELOG }}
+      REPOSITORY: ${{ github.repository }}
+    secrets: inherit
