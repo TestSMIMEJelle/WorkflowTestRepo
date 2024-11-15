@@ -40,7 +40,7 @@ jobs:
           cd ${{ env.ASSETS_PATH }}
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "${{ inputs.TAG }}" "${{ env.CHECKOUT_REF }}"
+          git tag "${{ inputs.TAG }}" "${{ env.CHECKOUT_REF }}"
           git push origin "${{ inputs.TAG }}"
           cd -
       - name: Checkout action repository
